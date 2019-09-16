@@ -5,20 +5,31 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint \"src/**/*.{ts,tsx}\""
   },
   "keywords": [],
   "author": "tamj0rd2",
   "license": "ISC",
   "dependencies": {
+    "jest": "^24.9.0",
     "parcel-bundler": "^1.12.3",
     "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0",
+    "styled-jsx": "^3.2.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.6.0",
     "@types/node": "^12.7.5",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
+    "@typescript-eslint/eslint-plugin": "^2.2.0",
+    "@typescript-eslint/parser": "^2.2.0",
+    "eslint": "^6.4.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.3",
+    "prettier": "^1.18.2",
     "typescript": "^3.6.3"
   }
 }

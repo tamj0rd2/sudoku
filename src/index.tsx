@@ -1,8 +1,9 @@
-import React from "react"
-import ReactDOM from "react-dom"
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Board from '~components/Board'
 
 function App(): JSX.Element {
-    return <h1>Hello, world!</h1>
+  return <Board />
 }
 
-ReactDOM.render(<App />, document.getElementById("root"))
+ReactDOM.render(<App />, document.getElementById('root'))

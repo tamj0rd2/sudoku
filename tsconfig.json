@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "moduleResolution": "node",
     "target": "es5",
     "jsx": "react",
     "baseUrl": "./src",
@@ -17,12 +16,6 @@
     "sourceMap": true,
     "noEmit": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/node_modules/*",
-    "dist/**/*"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/node_modules/*", "dist/**/*"]
 }
