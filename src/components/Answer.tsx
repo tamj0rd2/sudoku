@@ -13,7 +13,7 @@ export default function Answer({ num }: AnswerProps) {
     alignItems: 'center',
     height: dimen,
     width: dimen,
-    fontSize: '2em',
+    fontSize: '1.8em',
   }
 
   return <div style={style}>{num}</div>

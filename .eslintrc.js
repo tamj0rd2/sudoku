@@ -30,5 +30,6 @@ module.exports = {
   plugins: ['react', '@typescript-eslint'],
   rules: {
     'linebreak-style': ['error', 'unix'],
+    'no-unused-vars': 'off',
   },
 }

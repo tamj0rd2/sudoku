@@ -4,11 +4,18 @@ import PencilMarks from './PencilMarks'
 
 interface CellProps {
   isSelected: boolean
-  select: () => void
+  selectCell: () => void
+  answer: number | ''
+  setAnswer: () => void
 }
 
 // TODO: use styled components
-export default function Cell({ isSelected, select }: CellProps): JSX.Element {
+export default function Cell({
+  answer,
+  setAnswer,
+  isSelected,
+  selectCell,
+}: CellProps): JSX.Element {
   const divRef = useRef<HTMLDivElement>(null)
 
   const dimen = '30px'
@@ -29,8 +36,8 @@ export default function Cell({ isSelected, select }: CellProps): JSX.Element {
   }
 
   return (
-    <div tabIndex={0} style={styles} onClick={select} ref={divRef}>
-      <Answer num="" />
+    <div onKeyDown={setAnswer} tabIndex={0} style={styles} onClick={selectCell} ref={divRef}>
+      <Answer num={answer} />
       <PencilMarks />
     </div>
   )

@@ -1,55 +1,37 @@
 import React, { useReducer } from 'react'
 import Cell from './Cell'
-
-interface Coordinate {
-  col: number
-  row: number
-}
-
-interface CoordinateAction {
-  type: 'RELATIVE' | 'ABSOLUTE'
-  payload: string | Coordinate
-}
+import Reducer from '~reducers'
 
 const getCellId = (col: number, row: number) => `${col},${row}`
-const isValidIndex = (num: number) => num > 0 && num <= 9
 
-const coordinateReducer = (current: Coordinate, action: CoordinateAction): Coordinate => {
-  if (action.type === 'RELATIVE') {
-    switch (action.payload as string) {
-      case 'ArrowUp': {
-        const nextRow = current.row - 1
-        return isValidIndex(nextRow) ? { col: current.col, row: nextRow } : current
-      }
-      case 'ArrowRight': {
-        const nextCol = current.col + 1
-        return isValidIndex(nextCol) ? { col: nextCol, row: current.row } : current
-      }
-      case 'ArrowDown': {
-        const nextRow = current.row + 1
-        return isValidIndex(nextRow) ? { col: current.col, row: nextRow } : current
-      }
-      case 'ArrowLeft': {
-        const nextCol = current.col - 1
-        return isValidIndex(nextCol) ? { col: nextCol, row: current.row } : current
-      }
-      default:
-        return current
-    }
-  }
+const initBoardState = (): BoardState => {
+  const cells = Array.from({ length: 9 }, (_, x) => {
+    return Array.from(
+      { length: 9 },
+      (_, y): CellData => {
+        const col = y + 1
+        const row = x + 1
+        return {
+          col,
+          row,
+          //id: `${col},${row}`,
+          //isSelected: false,
+          //answer: '',
+          //marks: [1, 2, 7],
+          // solution: ''
+        }
+      },
+    )
+  })
 
-  if (action.type === 'ABSOLUTE') {
-    return action.payload as Coordinate
-  }
-
-  return current
+  return { cells, selectedCell: cells[0][0] }
 }
 
 export default function Board(): JSX.Element {
-  const [selectedCell, dispatch] = useReducer(coordinateReducer, { col: 0, row: 0 })
+  const [state, dispatch] = useReducer(Reducer, initBoardState())
 
   return (
-    <div tabIndex={0} onKeyDown={e => dispatch({ type: 'RELATIVE', payload: e.key })}>
+    <div tabIndex={0} onKeyDown={e => dispatch({ type: 'SELECT_RELATIVE', payload: e.key })}>
       {Array.from({ length: 9 }).map((_, y) => {
         const row = y + 1
         return (
@@ -60,8 +42,10 @@ export default function Board(): JSX.Element {
 
               return (
                 <Cell
-                  select={() => dispatch({ type: 'ABSOLUTE', payload: { col, row } })}
-                  isSelected={selectedCell.col === col && selectedCell.row === row}
+                  selectCell={() => dispatch({ type: 'SELECT_ABSOLUTE', payload: { col, row } })}
+                  isSelected={state.selectedCell.col === col && state.selectedCell.row === row}
+                  answer={col}
+                  setAnswer={() => {}}
                   key={cellId}
                 />
               )
