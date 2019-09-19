@@ -26,8 +26,7 @@ export default function Cell({ col, row, dispatch, answer, isSelected }: CellPro
       onClick={() => dispatch({ type: 'SELECT_ABSOLUTE', payload: { col: col, row: row } })}
       ref={divRef}
     >
-      <Answer num={answer} />
-      <PencilMarks />
+      {answer ? <Answer num={answer} /> : <PencilMarks />}
     </div>
   )
 }
