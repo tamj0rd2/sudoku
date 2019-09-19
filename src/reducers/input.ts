@@ -7,9 +7,10 @@ function immutableReplace<T>(arr: T[], index: number, item: T) {
   return [...arr.slice(0, index), item, ...arr.slice(index + 1)]
 }
 
-const getNextState = (state: BoardState, newAnswer: Answer): BoardState => {
-  const { cells, selectedCoords } = state
-
+const getNextState = (
+  { cells, selectedCoords, ...state }: BoardState,
+  newAnswer: Answer,
+): BoardState => {
   const rowIndex = selectedCoords.row - 1
   const colIndex = selectedCoords.col - 1
   const cell = cells[rowIndex][colIndex]
@@ -18,7 +19,7 @@ const getNextState = (state: BoardState, newAnswer: Answer): BoardState => {
   const updatedRow = immutableReplace(cells[rowIndex], colIndex, updatedCell)
   const updatedCells = immutableReplace(cells, rowIndex, updatedRow)
 
-  return { ...state, cells: updatedCells }
+  return { ...state, selectedCoords, cells: updatedCells }
 }
 
 // TODO: fix issue of answer disappearing on re-render

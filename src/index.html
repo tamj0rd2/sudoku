@@ -4,50 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Sudoku</title>
-    <style>
-      body {
-        font-family: Arial, Helvetica, sans-serif;
-      }
-
-      /* TODO: all this stuff can be moved somewhere proper
-      styled components would be good */
-
-      #board {
-        border: 2px solid black;
-        display: flex;
-        flex-wrap: wrap;
-        width: 495px;
-        height: 495px;
-      }
-
-      .cell {
-        border: 0.5px solid rgba(0, 0, 0, 0.226);
-        width: 55px;
-        height: 55px;
-        position: relative;
-        box-sizing: border-box;
-      }
-
-      .cell:nth-child(3n) {
-        border-right: 1px solid black;
-      }
-
-      .cell:nth-child(3n + 1) {
-        border-left: 1px solid black;
-      }
-
-      .cell:nth-child(n):nth-child(-n + 9),
-      .cell:nth-child(n + 28):nth-child(-n + 36),
-      .cell:nth-child(n + 55):nth-child(-n + 63) {
-        border-top: 1px solid black;
-      }
-
-      .cell:nth-child(n + 19):nth-child(-n + 27),
-      .cell:nth-child(n + 46):nth-child(-n + 54),
-      .cell:nth-child(n + 73):nth-child(-n + 81) {
-        border-bottom: 1px solid black;
-      }
-    </style>
+    <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
     <div id="root"></div>

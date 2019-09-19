@@ -3,7 +3,13 @@ const cellsMapper = (_: any, y: number): CellData[] => {
 
   return Array.from({ length: 9 }).map((_, x) => {
     const col = x + 1
-    return { row, col, answer: '' }
+    const marks = Array.from({ length: 9 }).reduce((acc: MarkData, _, i): MarkData => {
+      // TODO: put some actual hide/show logic here
+      acc[i + 1] = true
+      return acc
+    }, {})
+
+    return { row, col, answer: '', marks }
   })
 }
 
