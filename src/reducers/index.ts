@@ -1,10 +1,16 @@
 import selectionReducer, { SelectionAction } from './selection'
+import { cellInputReducer, CellInputAction } from './input'
 
-type CellAction = SelectionAction
+export type Action = SelectionAction | CellInputAction
 
-export default function(current: BoardState, action: CellAction) {
-  if (action.type.startsWith('SELECT')) {
-    return selectionReducer(current, action)
+export default function(state: BoardState, action: Action) {
+  switch (action.type) {
+    case 'SELECT_RELATIVE':
+    case 'SELECT_ABSOLUTE':
+      return selectionReducer(state, action)
+    case 'CELL_INPUT':
+      return cellInputReducer(state, action)
+    default:
+      return state
   }
-  return current
 }

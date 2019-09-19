@@ -3,9 +3,11 @@ declare interface Coordinate {
   row: number
 }
 
-declare type CellData = Coordinate
+declare type CellData = Coordinate & {
+  answer: number | ''
+}
 
-interface BoardState {
-  selectedCell: CellData
+declare interface BoardState {
+  selectedCoords: Coordinate
   cells: CellData[][]
 }

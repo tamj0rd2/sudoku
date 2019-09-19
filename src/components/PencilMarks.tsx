@@ -31,7 +31,7 @@ export default function PencilMarks() {
     <div style={marksStyle}>
       {Array.from({ length: 9 }).map((_, i) => {
         const num = i + 1
-        return <PencilMark key={num} num={num} show={true} />
+        return <PencilMark key={num} num={num} show={false} />
       })}
     </div>
   )

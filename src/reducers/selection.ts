@@ -9,10 +9,10 @@ export type SelectionAction =
     }
 
 const getNextState = (state: BoardState, item: keyof Coordinate, change: 1 | -1): BoardState => {
-  const nextIndex = state.selectedCell[item] + change
+  const nextIndex = state.selectedCoords[item] + change
   if (nextIndex >= 1 && nextIndex <= 9) {
-    const selectedCell = { ...state.selectedCell, [item]: nextIndex }
-    return { ...state, selectedCell }
+    const selectedCoords = { ...state.selectedCoords, [item]: nextIndex }
+    return { ...state, selectedCoords }
   }
   return state
 }
@@ -34,7 +34,7 @@ const selectionReducer = (state: BoardState, action: SelectionAction): BoardStat
   }
 
   if (action.type === 'SELECT_ABSOLUTE') {
-    return { ...state, selectedCell: action.payload }
+    return { ...state, selectedCoords: action.payload }
   }
 
   return state

@@ -2,26 +2,19 @@ import React, { useRef } from 'react'
 import Answer from './Answer'
 import PencilMarks from './PencilMarks'
 import * as dimens from '~constants/dimens'
+import { Action } from '~reducers'
 
-interface CellProps {
+type CellProps = {
+  dispatch: React.Dispatch<Action>
   isSelected: boolean
-  selectCell: () => void
-  answer: number | ''
-  setAnswer: () => void
-}
+} & CellData
 
 // TODO: use styled components
-export default function Cell({
-  answer,
-  setAnswer,
-  isSelected,
-  selectCell,
-}: CellProps): JSX.Element {
+export default function Cell({ col, row, dispatch, answer, isSelected }: CellProps): JSX.Element {
   const divRef = useRef<HTMLDivElement>(null)
 
   const styles: React.CSSProperties = {
     border: '1px solid black',
-    display: 'inline-block',
     width: dimens.CELL_WIDTH,
     height: dimens.CELL_WIDTH,
     position: 'relative',
@@ -29,14 +22,19 @@ export default function Cell({
   }
 
   if (isSelected) {
-    styles.backgroundColor = '#a0ffff'
     if (divRef.current) {
       divRef.current.focus()
     }
   }
 
   return (
-    <div onKeyDown={setAnswer} tabIndex={0} style={styles} onClick={selectCell} ref={divRef}>
+    <div
+      onKeyDown={e => dispatch({ type: 'CELL_INPUT', payload: e.key })}
+      tabIndex={0}
+      style={styles}
+      onClick={() => dispatch({ type: 'SELECT_ABSOLUTE', payload: { col: col, row: row } })}
+      ref={divRef}
+    >
       <Answer num={answer} />
       <PencilMarks />
     </div>
