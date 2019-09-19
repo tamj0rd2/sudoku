@@ -7,20 +7,28 @@ function immutableReplace<T>(arr: T[], index: number, item: T) {
   return [...arr.slice(0, index), item, ...arr.slice(index + 1)]
 }
 
-// TODO: fix issue of answer disappearing on re-render
-export const cellInputReducer = (state: BoardState, action: CellInputAction): BoardState => {
+const getNextState = (state: BoardState, newAnswer: Answer): BoardState => {
   const { cells, selectedCoords } = state
 
+  const rowIndex = selectedCoords.row - 1
+  const colIndex = selectedCoords.col - 1
+  const cell = cells[rowIndex][colIndex]
+
+  const updatedCell = { ...cell, answer: newAnswer }
+  const updatedRow = immutableReplace(cells[rowIndex], colIndex, updatedCell)
+  const updatedCells = immutableReplace(cells, rowIndex, updatedRow)
+
+  return { ...state, cells: updatedCells }
+}
+
+// TODO: fix issue of answer disappearing on re-render
+export const cellInputReducer = (state: BoardState, action: CellInputAction): BoardState => {
   if (/^[1-9]$/.test(action.payload)) {
-    const rowIndex = selectedCoords.row - 1
-    const colIndex = selectedCoords.col - 1
-    const cell = cells[rowIndex][colIndex]
+    return getNextState(state, parseInt(action.payload))
+  }
 
-    const updatedCell = { ...cell, answer: parseInt(action.payload) }
-    const updatedRow = immutableReplace(cells[rowIndex], colIndex, updatedCell)
-    const updatedCells = immutableReplace(cells, rowIndex, updatedRow)
-
-    return { ...state, cells: updatedCells }
+  if (action.payload === 'Backspace') {
+    return getNextState(state, '')
   }
 
   return state

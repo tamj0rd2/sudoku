@@ -3,8 +3,10 @@ declare interface Coordinate {
   row: number
 }
 
+declare type Answer = number | ''
+
 declare type CellData = Coordinate & {
-  answer: number | ''
+  answer: Answer
 }
 
 declare interface BoardState {

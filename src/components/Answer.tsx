@@ -2,7 +2,7 @@ import React from 'react'
 import * as dimens from '~constants/dimens'
 
 interface AnswerProps {
-  num: number | ''
+  num: Answer
 }
 
 export default function Answer({ num }: AnswerProps) {
