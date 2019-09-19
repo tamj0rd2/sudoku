@@ -7,16 +7,9 @@ import generateBoard from '~logic/generator'
 export default function Board(): JSX.Element {
   const [state, dispatch] = useReducer(Reducer, null, generateBoard)
 
-  const boardStyle: React.CSSProperties = {
-    display: 'flex',
-    flexWrap: 'wrap',
-    width: dimens.BOARD_WIDTH,
-    height: dimens.BOARD_WIDTH,
-  }
-
   return (
     <div
-      style={boardStyle}
+      id="board"
       tabIndex={0}
       onKeyDown={e => dispatch({ type: 'SELECT_RELATIVE', payload: e.key })}
     >

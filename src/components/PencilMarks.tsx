@@ -12,8 +12,10 @@ function PencilMark({ num, show }: PencilMarkProps) {
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: '.9em',
+    visibility: show ? 'visible' : 'hidden',
   }
-  return <div style={style}>{show ? num : ''}</div>
+
+  return <div style={style}>{num}</div>
 }
 
 export default function PencilMarks() {
