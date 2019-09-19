@@ -45,7 +45,9 @@ export default function Board(): JSX.Element {
                   selectCell={() => dispatch({ type: 'SELECT_ABSOLUTE', payload: { col, row } })}
                   isSelected={state.selectedCell.col === col && state.selectedCell.row === row}
                   answer={col}
-                  setAnswer={() => {}}
+                  setAnswer={e => {
+                    dispatch({ type: 'CELL_INPUT', payload: e.key })
+                  }}
                   key={cellId}
                 />
               )

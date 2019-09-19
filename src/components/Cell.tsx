@@ -6,7 +6,7 @@ interface CellProps {
   isSelected: boolean
   selectCell: () => void
   answer: number | ''
-  setAnswer: () => void
+  setAnswer: (e: React.KeyboardEvent) => void
 }
 
 // TODO: use styled components
