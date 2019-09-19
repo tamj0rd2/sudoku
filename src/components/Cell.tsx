@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import Answer from './Answer'
 import PencilMarks from './PencilMarks'
+import * as dimens from '~constants/dimens'
 
 interface CellProps {
   isSelected: boolean
@@ -18,14 +19,13 @@ export default function Cell({
 }: CellProps): JSX.Element {
   const divRef = useRef<HTMLDivElement>(null)
 
-  const dimen = '30px'
-
   const styles: React.CSSProperties = {
     border: '1px solid black',
     display: 'inline-block',
-    width: dimen,
-    height: dimen,
+    width: dimens.CELL_WIDTH,
+    height: dimens.CELL_WIDTH,
     position: 'relative',
+    boxSizing: 'border-box',
   }
 
   if (isSelected) {

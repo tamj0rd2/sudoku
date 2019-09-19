@@ -6,27 +6,22 @@ interface PencilMarkProps {
 }
 
 function PencilMark({ num, show }: PencilMarkProps) {
-  const dimen = '10px'
-
   const style: React.CSSProperties = {
-    width: dimen,
-    height: dimen,
-    fontSize: '10px',
     display: 'flex',
+    flex: `0 0 ${100 / 3}%`,
     justifyContent: 'center',
     alignItems: 'center',
+    fontSize: '.9em',
   }
   return <div style={style}>{show ? num : ''}</div>
 }
 
 export default function PencilMarks() {
-  const dimen = '30px'
-
   const marksStyle: React.CSSProperties = {
     display: 'flex',
     flexWrap: 'wrap',
-    width: dimen,
-    height: dimen,
+    width: '100%',
+    height: '100%',
     position: 'absolute',
     top: 0,
     left: 0,

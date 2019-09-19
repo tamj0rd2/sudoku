@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react'
 import Cell from './Cell'
 import Reducer from '~reducers'
+import * as dimens from '~constants/dimens'
 
 const getCellId = (col: number, row: number) => `${col},${row}`
 
@@ -31,11 +32,15 @@ export default function Board(): JSX.Element {
   const [state, dispatch] = useReducer(Reducer, initBoardState())
 
   return (
-    <div tabIndex={0} onKeyDown={e => dispatch({ type: 'SELECT_RELATIVE', payload: e.key })}>
+    <div
+      style={{ width: dimens.BOARD_WIDTH }}
+      tabIndex={0}
+      onKeyDown={e => dispatch({ type: 'SELECT_RELATIVE', payload: e.key })}
+    >
       {Array.from({ length: 9 }).map((_, y) => {
         const row = y + 1
         return (
-          <div key={row}>
+          <React.Fragment key={row}>
             {Array.from({ length: 9 }).map((_, x) => {
               const col = x + 1
               const cellId = getCellId(col, row)
@@ -50,7 +55,7 @@ export default function Board(): JSX.Element {
                 />
               )
             })}
-          </div>
+          </React.Fragment>
         )
       })}
     </div>
