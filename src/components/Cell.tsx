@@ -1,7 +1,6 @@
 import React, { useRef } from 'react'
 import Answer from './Answer'
 import PencilMarks from './PencilMarks'
-import * as dimens from '~constants/dimens'
 import { Action } from '~reducers'
 
 type CellProps = {

@@ -1,7 +1,6 @@
 import React, { useReducer } from 'react'
 import Cell from './Cell'
 import Reducer from '~reducers'
-import * as dimens from '~constants/dimens'
 import generateBoard from '~logic/generator'
 
 export default function Board(): JSX.Element {
