@@ -6,6 +6,7 @@ body {
 styled components would be good */
 
 #board {
+  /* TODO: fix the spacing between top row of marks and the border. it's a bit small/inconsistent */
   border: 2px solid black;
   display: flex;
   flex-wrap: wrap;

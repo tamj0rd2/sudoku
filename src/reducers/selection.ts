@@ -1,3 +1,8 @@
+const COL = 'col'
+const ROW = 'row'
+
+import { createCellId } from '~helpers'
+
 export type SelectionAction =
   | {
       type: 'SELECT_RELATIVE'
@@ -9,32 +14,32 @@ export type SelectionAction =
     }
 
 const getNextState = (state: BoardState, item: keyof Coordinate, change: 1 | -1): BoardState => {
-  const nextIndex = state.selectedCoords[item] + change
-  if (nextIndex >= 1 && nextIndex <= 9) {
-    const selectedCoords = { ...state.selectedCoords, [item]: nextIndex }
-    return { ...state, selectedCoords }
-  }
-  return state
+  const col = item === COL ? state.selectedCell.col + change : state.selectedCell.col
+  const row = item === ROW ? state.selectedCell.row + change : state.selectedCell.row
+  const selectedCell = state.cells[createCellId(col, row)]
+
+  return selectedCell ? { ...state, selectedCell } : state
 }
 
 const selectionReducer = (state: BoardState, action: SelectionAction): BoardState => {
   if (action.type === 'SELECT_RELATIVE') {
     switch (action.payload) {
       case 'ArrowUp':
-        return getNextState(state, 'row', -1)
+        return getNextState(state, ROW, -1)
       case 'ArrowDown':
-        return getNextState(state, 'row', 1)
+        return getNextState(state, ROW, 1)
       case 'ArrowRight':
-        return getNextState(state, 'col', 1)
+        return getNextState(state, COL, 1)
       case 'ArrowLeft':
-        return getNextState(state, 'col', -1)
+        return getNextState(state, COL, -1)
       default:
         return state
     }
   }
 
   if (action.type === 'SELECT_ABSOLUTE') {
-    return { ...state, selectedCoords: action.payload }
+    const { col, row } = action.payload
+    return { ...state, selectedCell: state.cells[createCellId(col, row)] }
   }
 
   return state
