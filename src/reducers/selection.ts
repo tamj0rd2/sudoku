@@ -14,8 +14,8 @@ export type SelectionAction =
     }
 
 const getNextState = (state: BoardState, item: keyof Coordinate, change: 1 | -1): BoardState => {
-  const col = item === COL ? state.selectedCell.col + change : state.selectedCell.col
-  const row = item === ROW ? state.selectedCell.row + change : state.selectedCell.row
+  const col = item === COL ? ((state.selectedCell.col + change) as SuNum) : state.selectedCell.col
+  const row = item === ROW ? ((state.selectedCell.row + change) as SuNum) : state.selectedCell.row
   const selectedCell = state.cells[createCellId(col, row)]
 
   return selectedCell ? { ...state, selectedCell } : state

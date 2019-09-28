@@ -37,9 +37,7 @@ export default function Cell({ answer, dispatch, ...props }: CellProps): JSX.Ele
       className="cell"
       onKeyDown={e => dispatch({ type: 'CELL_INPUT', payload: e.key })}
       tabIndex={0}
-      onClick={() =>
-        dispatch({ type: 'SELECT_ABSOLUTE', payload: { col: props.col, row: props.row } })
-      }
+      onClick={() => dispatch({ type: 'SELECT_ABSOLUTE', payload: props })}
       ref={divRef}
     >
       {answer ? <div className="answer">{answer}</div> : <PencilMarks marks={props.marks} />}
